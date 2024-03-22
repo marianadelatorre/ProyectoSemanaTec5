@@ -16,7 +16,7 @@ from freegames import path
 
 car = path('car.gif')
 tiles = list(range(32)) * 2
-state = {'mark': None}
+state = {'mark': None, 'count': 0, 'matches': 0}
 hide = [True] * 64
 
 
@@ -54,6 +54,8 @@ def tap(x, y):
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
+        state['matches'] += 1  # increment matches
+        state['count'] += 1  # increment tap count when a match is found
 
 
 def draw():
@@ -77,6 +79,11 @@ def draw():
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
 
+    # display tap count
+    up()
+    goto(-200, 210)
+    write("Matches: " + str(state['count']), font=('Arial', 20, 'normal'))
+
     update()
     ontimer(draw, 100)
 
@@ -89,3 +96,4 @@ tracer(False)
 onscreenclick(tap)
 draw()
 done()
+

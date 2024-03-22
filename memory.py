@@ -1,24 +1,14 @@
-"""Memory, puzzle game of number pairs.
-
-Exercises:
-
-1. Count and print how many taps occur.
-2. Decrease the number of tiles to a 4x4 grid.
-3. Detect when all tiles are revealed.
-4. Center single-digit tile.
-5. Use letters instead of tiles.
-"""
-
 from random import *
 from turtle import *
 
 from freegames import path
 
 car = path('car.gif')
-tiles = list(range(32)) * 2
+emojis = ['\U0001F33C', '\U0001F337', '\U0001F31F', '\U0001F319', '\U0001F30A', '\U0001F48C', '\U0001F49F', '\U0001F493', '\U0001F48B', '\U0001F607', '\U0001F430', '\U0001F431', '\U0001F33E', '\U0001F490', '\U0001F9FA', '\U0001F6C1', '\U0001F43E', '\U0001FA70', '\U0001F375', '\U0001F9B7', '\U0001F340', '\U0001F331', '\U0001F344', '\U0001F324', '\U0001FA90', '\U0001F352', '\U0001F34B', '\U0001F37A', '\U0001F3D6', '\U0001F975', '\U0001F92D', '\U0001F925']
+emojis *= 4 
+shuffle(emojis)
 state = {'mark': None}
 hide = [True] * 64
-
 
 def square(x, y):
     """Draw white square with black outline at (x, y)."""
@@ -32,25 +22,20 @@ def square(x, y):
         left(90)
     end_fill()
 
-
 def index(x, y):
     """Convert (x, y) coordinates to tiles index."""
     return int((x + 200) // 50 + ((y + 200) // 50) * 8)
 
-
 def xy(count):
     """Convert tiles count to (x, y) coordinates."""
     return (count % 8) * 50 - 200, (count // 8) * 50 - 200
-
-
-from turtle import textinput, write, Turtle, update
 
 def tap(x, y):
     """Update mark and hidden tiles based on tap."""
     spot = index(x, y)
     mark = state['mark']
 
-    if mark is None or mark == spot or tiles[mark] != tiles[spot]:
+    if mark is None or mark == spot or emojis[mark] != emojis[spot]:
         state['mark'] = spot
     else:
         hide[spot] = False
@@ -74,14 +59,14 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
+        # Ajustar la posición del texto para centrarlo en el cuadrado
         goto(x + 20, y + 10)
         color('black')
-        write(tiles[mark], align="center", font=('Arial', 30, 'normal'))
+        write(emojis[mark], align="center", font=('Arial', 30, 'normal'))
 
     update()
     ontimer(draw, 100)
 
-shuffle(tiles)
 setup(420, 420, 370, 0)
 addshape(car)
 hideturtle()

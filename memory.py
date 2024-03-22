@@ -43,6 +43,8 @@ def xy(count):
     return (count % 8) * 50 - 200, (count // 8) * 50 - 200
 
 
+from turtle import textinput, write, Turtle, update
+
 def tap(x, y):
     """Update mark and hidden tiles based on tap."""
     spot = index(x, y)
@@ -54,7 +56,6 @@ def tap(x, y):
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
-
 
 def draw():
     """Draw image and tiles."""
@@ -73,13 +74,12 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        goto(x + 20, y + 10)
         color('black')
-        write(tiles[mark], font=('Arial', 30, 'normal'))
+        write(tiles[mark], align="center", font=('Arial', 30, 'normal'))
 
     update()
     ontimer(draw, 100)
-
 
 shuffle(tiles)
 setup(420, 420, 370, 0)

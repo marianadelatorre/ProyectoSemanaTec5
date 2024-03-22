@@ -5,6 +5,7 @@ from freegames import path
 
 car = path('car.gif')
 
+#Aqui en vez de tiles, se nos ocurrio poner emojis para la facil memoria, usamos diferentes emojis e hicimos el cambio 
 emojis = ['\U0001F33C', '\U0001F337', '\U0001F31F', '\U0001F319', '\U0001F30A', '\U0001F48C', '\U0001F49F', '\U0001F493', '\U0001F48B', '\U0001F607', '\U0001F430', '\U0001F431', '\U0001F33E', '\U0001F490', '\U0001F9FA', '\U0001F6C1', '\U0001F43E', '\U0001FA70', '\U0001F375', '\U0001F9B7', '\U0001F340', '\U0001F331', '\U0001F344', '\U0001F324', '\U0001FA90', '\U0001F352', '\U0001F34B', '\U0001F37A', '\U0001F3D6', '\U0001F975', '\U0001F92D', '\U0001F925']
 emojis *= 4 
 shuffle(emojis)
@@ -42,8 +43,8 @@ def tap(x, y):
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
-        state['matches'] += 1  # increment matches
-        state['count'] += 1  # increment tap count when a match is found
+        state['matches'] += 1  
+        state['count'] += 1  
 
 def draw():
     """Draw image and tiles."""
@@ -62,7 +63,7 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        # Ajustar la posición del texto para centrarlo en el cuadrado
+        # Ajuste la posición del texto para alinearlo en el centro del cuadro
         goto(x + 20, y + 10)
         color('black')
         write(emojis[mark], align="center", font=('Arial', 30, 'normal'))

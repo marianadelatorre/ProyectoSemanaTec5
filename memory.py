@@ -79,10 +79,15 @@ def draw():
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
 
-    # display tap count
+   
     up()
     goto(-200, 210)
     write("Matches: " + str(state['count']), font=('Arial', 20, 'normal'))
+
+    if state['matches'] == len(tiles) // 2:
+        up()
+        goto(-90, 0)
+        write("Puzzle Completed!", font=('Arial', 30, 'normal'))
 
     update()
     ontimer(draw, 100)
